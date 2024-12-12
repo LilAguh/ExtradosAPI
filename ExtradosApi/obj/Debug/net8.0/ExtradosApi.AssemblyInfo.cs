@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExtradosApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5559a0e1e8717df5c640425c0dbe4a5f4e8818c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExtradosApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExtradosApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
