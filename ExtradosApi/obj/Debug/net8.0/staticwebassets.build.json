@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "kXZFHfY2fKIObFwJDwEFytLTBrYzbE6UeM4LBzEF40g=",
+  "Source": "ExtradosApi",
+  "BasePath": "_content/ExtradosApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
