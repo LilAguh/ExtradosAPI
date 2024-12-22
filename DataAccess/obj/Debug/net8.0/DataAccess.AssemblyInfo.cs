@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ExtradosApi")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6ac2aa7da431f91ffcca81d325572e568a1bbaf")]
-[assembly: System.Reflection.AssemblyProductAttribute("ExtradosApi")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ExtradosApi")]
+[assembly: System.Reflection.AssemblyProductAttribute("DataAccess")]
+[assembly: System.Reflection.AssemblyTitleAttribute("DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.
