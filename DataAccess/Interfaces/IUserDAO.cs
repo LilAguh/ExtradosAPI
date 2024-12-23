@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccess.Models;
 
 namespace DataAccess.Interfaces
 {
-    internal class IUserDAO
+    public interface IUserDAO
     {
+        List<User> GetAllUsersRegistered();
+        List<User> GetAllActiveUsers();
+        User GetUser(int id);
+        User CreateUser(string name, string mail, int age); // Actualizar firma aquí
+        User UpdateUser(int id, string? name = null, int? age = null, string? mail = null);
+        bool DesactivateUser(int id);
     }
 }
