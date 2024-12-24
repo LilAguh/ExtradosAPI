@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "ExtradosApi.Controllers.UserController",
-    "Method": "GetAll",
+    "Method": "GetAllUsersRegistered",
     "RelativePath": "User",
     "HttpMethod": "GET",
     "IsController": true,
@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "ExtradosApi.Models.Users",
+        "Type": "DataAccess.Models.User",
         "IsRequired": true
       }
     ],
@@ -27,7 +27,7 @@
   },
   {
     "ContainingType": "ExtradosApi.Controllers.UserController",
-    "Method": "GetUser",
+    "Method": "GetUserById",
     "RelativePath": "User/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -56,7 +56,7 @@
       },
       {
         "Name": "user",
-        "Type": "ExtradosApi.Models.Users",
+        "Type": "DataAccess.Models.User",
         "IsRequired": true
       }
     ],
@@ -64,19 +64,9 @@
   },
   {
     "ContainingType": "ExtradosApi.Controllers.UserController",
-    "Method": "GetAllUsersActive",
-    "RelativePath": "User/active",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ExtradosApi.Controllers.UserController",
-    "Method": "DesactivateUser",
-    "RelativePath": "User/desactivate/{id}",
-    "HttpMethod": "PUT",
+    "Method": "DeactivateUser",
+    "RelativePath": "User/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -89,24 +79,13 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ExtradosApi.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "ContainingType": "ExtradosApi.Controllers.UserController",
+    "Method": "GetAllActiveUsers",
+    "RelativePath": "User/active",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExtradosApi.WeatherForecast, ExtradosApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

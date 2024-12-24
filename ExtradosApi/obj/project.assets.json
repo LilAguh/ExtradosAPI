@@ -1058,6 +1058,10 @@
       "DataAccess/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Dapper": "2.1.35",
+          "MySqlConnector": "2.4.0"
+        },
         "compile": {
           "bin/placeholder/DataAccess.dll": {}
         },

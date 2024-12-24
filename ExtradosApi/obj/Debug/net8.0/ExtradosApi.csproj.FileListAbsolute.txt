@@ -256,7 +256,6 @@ C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosA
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.AssemblyInfoInputs.cache
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.AssemblyInfo.cs
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.csproj.CoreCompileInputs.cache
-C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.sourcelink.json
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\scopedcss\bundle\ExtradosApi.styles.css
@@ -276,3 +275,6 @@ C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosA
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.pdb
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.genruntimeconfig.cache
 C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ref\ExtradosApi.dll
+C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\bin\Debug\net8.0\DataAccess.dll
+C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\bin\Debug\net8.0\DataAccess.pdb
+C:\Users\aguez\OneDrive\Documentos\Dev\BootcampExtrados\C#\ExtradosApi\ExtradosApi\obj\Debug\net8.0\ExtradosApi.MvcApplicationPartsAssemblyInfo.cs
