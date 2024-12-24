@@ -1,7 +1,11 @@
-﻿using ExtradosApi.DAOs;
-using ExtradosApi.Models;
+﻿
+using DataAccess.Models;
+using ExtradosApi.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using DataAccess.Interfaces;
+using DataAccess.Implementations;
+using ExtradosApi.Services.Interfaces;
 
 namespace ExtradosApi.Controllers
 {
@@ -9,70 +13,105 @@ namespace ExtradosApi.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-       
-        
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
-        public IActionResult GetAll() 
+        public IActionResult GetAllUsersRegistered()
         {
-            var users = DAOUsers.Instance.GetAllUsersActive();
-            return Ok(users);
+            try
+            {
+                var users = _userService.GetAllUsersRegistered();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // Obtener todos los usuarios activos
         [HttpGet("active")]
-        public IActionResult GetAllUsersActive()
+        public IActionResult GetAllActiveUsers()
         {
-            var users = DAOUsers.Instance.GetAllUsersActive();
-            return Ok(users);
+            try
+            {
+                var users = _userService.GetAllActiveUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // Obtener un usuario por ID
         [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        public IActionResult GetUserById(int id)
         {
-            var user = DAOUsers.Instance.GetUser(id);
-            if (user == null) return NotFound($"No se encontró el usuario con ID {id}.");
-            return Ok(user);
+            try
+            {
+                var user = _userService.GetUser(id);
+                if (user == null)
+                    return NotFound("User not found.");
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // Crear un usuario
         [HttpPost]
-        public IActionResult CreateUser([FromBody] Users user)
+        public IActionResult CreateUser([FromBody] User user)
         {
-            if (user.Age <= 14)
-                return BadRequest("La edad debe ser mayor a 14 años.");
-
-            if (!user.Mail.Contains("@gmail.com"))
-                return BadRequest("El email debe ser un correo de Gmail.");
-
-            var nuevoUsuario = DAOUsers.Instance.CreateUser(user.Name,user.Mail, user.Age);
-            return Ok(nuevoUsuario);
+            try
+            {
+                var newUser = _userService.CreateUser(user.Name, user.Mail, user.Age);
+                return CreatedAtAction(nameof(GetUserById), new { id = newUser.ID }, newUser);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // Actualizar un usuario
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, [FromBody] Users user)
+        public IActionResult UpdateUser(int id, [FromBody] User user)
         {
-            if (user.Age <= 14)
-                return BadRequest("La edad debe ser mayor a 14 años.");
-
-            if (!string.IsNullOrEmpty(user.Mail) && !user.Mail.Contains("@gmail.com"))
-                return BadRequest("El email debe ser un correo de Gmail.");
-
-            var usuarioActualizado = DAOUsers.Instance.UpdateUser(id, user.Name, user.Age, user.Mail);
-            if (usuarioActualizado == null)
-                return NotFound($"No se encontró el usuario con ID {id} para actualizar.");
-            return Ok(usuarioActualizado);
+            try
+            {
+                var updatedUser = _userService.UpdateUser(id, user.Name, user.Age, user.Mail);
+                return Ok(updatedUser);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // Desactivar un usuario (borrado lógico)
-        [HttpPut("desactivate/{id}")]
-        public IActionResult DesactivateUser(int id)
+        [HttpDelete("{id}")]
+        public IActionResult DeactivateUser(int id)
         {
-            var success = DAOUsers.Instance.DesactivateUser(id);
-            if (!success)
-                return NotFound($"No se encontró el usuario con ID {id} para desactivar.");
-            return Ok($"Usuario con ID {id} desactivado con éxito.");
+            try
+            {
+                var result = _userService.DeactivateUser(id);
+                return result ? Ok("User deactivated successfully.") : NotFound("User not found.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }
