@@ -27,14 +27,14 @@ namespace DataAccess.Implementations
             }
         }
 
-        public User CreateUser(string name, string mail, int age)
+        public User CreateUser(string name,string password, string mail, int age)
         {
-            string query = "INSERT INTO Users (name, mail, age) VALUES (@name, @mail, @age);";
+            string query = "INSERT INTO Users (name, mail, age, password) VALUES (@name, @mail, @age, @password);";
             string queryUserCreated = "SELECT * FROM Users WHERE id = LAST_INSERT_ID();";
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                connection.Execute(query, new { name, mail, age });
+                connection.Execute(query, new { name, password, mail, age });
                 var user = connection.QueryFirstOrDefault<User>(queryUserCreated);
                 return user;
             }
