@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DataAccess.Interfaces;
 using DataAccess.Implementations;
 using ExtradosApi.Services.Interfaces;
+using BCrypt.Net;
 
 namespace ExtradosApi.Controllers
 {
@@ -69,7 +70,7 @@ namespace ExtradosApi.Controllers
         {
             try
             {
-                var newUser = _userService.CreateUser(user.Name, user.Mail, user.Age);
+                var newUser = _userService.CreateUser(user.Name, user.Password, user.Mail, user.Age);
                 return CreatedAtAction(nameof(GetUserById), new { id = newUser.ID }, newUser);
             }
             catch (ArgumentException ex)
