@@ -23,10 +23,13 @@ namespace ExtradosApi.Services
         {
             return _userDAO.GetAllActiveUsers();
         }
-
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
-            return _userDAO.GetUser(id);
+            return _userDAO.GetUserById(id);
+        }
+        public User GetUser(string mail, string password)
+        {
+            return _userDAO.GetUser(mail, password);
         }
 
         public User CreateUser(string name, string password, string mail, int age)
