@@ -2,6 +2,7 @@
 using DataAccess.Models;
 using MySqlConnector;
 using Dapper;
+using BCrypt.Net;
 
 namespace DataAccess.Implementations
 {
@@ -29,12 +30,13 @@ namespace DataAccess.Implementations
 
         public User CreateUser(string name,string password, string mail, int age)
         {
-            string query = "INSERT INTO Users (name, mail, age, password) VALUES (@name, @mail, @age, @password);";
+            string passHash = BCrypt.Net.BCrypt.HashPassword(password);
+            string query = "INSERT INTO Users (name, mail, age, password) VALUES (@name, @mail, @age, @passHash);";
             string queryUserCreated = "SELECT * FROM Users WHERE id = LAST_INSERT_ID();";
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                connection.Execute(query, new { name, password, mail, age });
+                connection.Execute(query, new { name, passHash, mail, age });
                 var user = connection.QueryFirstOrDefault<User>(queryUserCreated);
                 return user;
             }
