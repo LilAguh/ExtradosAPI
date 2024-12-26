@@ -7,6 +7,7 @@ using DataAccess.Interfaces;
 using DataAccess.Implementations;
 using ExtradosApi.Services.Interfaces;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace ExtradosApi.Controllers
 {
@@ -49,12 +50,30 @@ namespace ExtradosApi.Controllers
             }
         }
 
+        [HttpPost("login")]
+        public IActionResult GetUser([FromBody] Login login)
+        {
+            try
+            {
+                var user = _userService.GetUser(login.Mail, login.Password);
+                return Ok(user);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
             try
             {
-                var user = _userService.GetUser(id);
+                var user = _userService.GetUserById(id);
                 if (user == null)
                     return NotFound("User not found.");
                 return Ok(user);
