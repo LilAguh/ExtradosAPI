@@ -72,13 +72,29 @@ namespace DataAccess.Implementations
             }
         }
 
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
             string query = "SELECT * FROM Users WHERE id = @id;";
             using (var connection = new MySqlConnection(connectionString))
             {
                 // Ejecutar la consulta y devolver el primer resultado
                 return connection.QueryFirstOrDefault<User>(query, new { id });
+            }
+        }
+
+        public User GetUser(string mail, string password)
+        {
+            string query = "SELECT * FROM Users WHERE mail = @mail;";
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                var user = connection.QueryFirstOrDefault<User>(query, new { mail });
+                if (user == null)
+                    throw new Exception($"User not found.");
+
+                bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+                if (!isPasswordValid)
+                    throw new Exception("Incorrect Password");
+                return user;
             }
         }
     }
