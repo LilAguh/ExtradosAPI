@@ -29,14 +29,14 @@ namespace ExtradosApi.Services
             return _userDAO.GetUser(id);
         }
 
-        public User CreateUser(string name, string mail, int age)
+        public User CreateUser(string name, string password, string mail, int age)
         {
             if (age <= 14)
                 throw new ArgumentException("Age must be greater than 14.");
             if (!mail.Contains("@gmail.com"))
                 throw new ArgumentException("Email must be a Gmail address.");
 
-            return _userDAO.CreateUser(name, mail, age);
+            return _userDAO.CreateUser(name, password, mail, age);
         }
 
         public User UpdateUser(int id, string? name = null, int? age = null, string? mail = null)
