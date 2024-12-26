@@ -6,7 +6,8 @@ namespace ExtradosApi.Services.Interfaces
     {
         List<User> GetAllUsersRegistered();
         List<User> GetAllActiveUsers();
-        User GetUser(int id);
+        User GetUser(string mail, string password);
+        User GetUserById(int id);
         User CreateUser(string name, string password, string mail, int age);
         User UpdateUser(int id, string? name = null, int? age = null, string? mail = null);
         bool DeactivateUser(int id);
