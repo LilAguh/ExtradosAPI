@@ -36,20 +36,27 @@ namespace ExtradosApi.Services
         {
             if (age <= 14)
                 throw new ArgumentException("Age must be greater than 14.");
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Name is required.");
             if (!mail.Contains("@gmail.com"))
                 throw new ArgumentException("Email must be a Gmail address.");
 
             return _userDAO.CreateUser(name, password, mail, age);
         }
 
-        public User UpdateUser(int id, string? name = null, int? age = null, string? mail = null)
+        public User UpdateUser(int id, string? name = null, int? age = null, string? mail = null, string? password = null)
         {
-            if (age.HasValue && age <= 14)
-                throw new ArgumentException("Age must be greater than 14.");
-            if (!string.IsNullOrEmpty(mail) && !mail.Contains("@gmail.com"))
-                throw new ArgumentException("Email must be a Gmail address.");
+            var user = _userDAO.GetUserById(id);
+            if (user == null)
+                throw new Exception($"User with ID {id} not found.");
 
-            return _userDAO.UpdateUser(id, name, age, mail);
+            // Mantener valores actuales si no se proporcionan nuevos
+            string newName = name ?? user.Name;
+            int newAge = (int)(age ?? user.Age); // Usa el valor actual si es null
+            string newMail = mail ?? user.Mail;
+            string newPassword = password != null ? BCrypt.Net.BCrypt.HashPassword(password) : user.Password;
+
+            return _userDAO.UpdateUser(id, newName, newAge, newMail, newPassword);
         }
 
         public bool DeactivateUser(int id)
