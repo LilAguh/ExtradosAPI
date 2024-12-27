@@ -74,13 +74,11 @@ namespace ExtradosApi.Controllers
             try
             {
                 var user = _userService.GetUserById(id);
-                if (user == null)
-                    return NotFound("User not found.");
                 return Ok(user);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -89,7 +87,11 @@ namespace ExtradosApi.Controllers
         {
             try
             {
-                var newUser = _userService.CreateUser(user.Name, user.Password, user.Mail, user.Age);
+                // Validar que Age no sea null
+                if (!user.Age.HasValue)
+                    throw new ArgumentException("Age is required.");
+
+                var newUser = _userService.CreateUser(user.Name, user.Password, user.Mail, user.Age.Value);
                 return CreatedAtAction(nameof(GetUserById), new { id = newUser.ID }, newUser);
             }
             catch (ArgumentException ex)
@@ -107,16 +109,12 @@ namespace ExtradosApi.Controllers
         {
             try
             {
-                var updatedUser = _userService.UpdateUser(id, user.Name, user.Age, user.Mail);
+                var updatedUser = _userService.UpdateUser(id, user.Name, user.Age, user.Mail, user.Password);
                 return Ok(updatedUser);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
