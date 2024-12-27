@@ -28,7 +28,7 @@ namespace DataAccess.Implementations
             }
         }
 
-        public User CreateUser(string name,string password, string mail, int age)
+        public User CreateUser(string name, string password, string mail, int age)
         {
             string passHash = BCrypt.Net.BCrypt.HashPassword(password);
             string query = "INSERT INTO Users (name, mail, age, password) VALUES (@name, @mail, @age, @passHash);";
@@ -42,23 +42,15 @@ namespace DataAccess.Implementations
             }
         }
 
-        public User UpdateUser(int id, string? name = null, int? age = null, string? mail = null)
+        public User UpdateUser(int id, string name, int age, string mail, string password)
         {
-            string queryUpdateUser = "SELECT * FROM Users WHERE id = @id;";
-            string query = "UPDATE Users SET name = @name, age = @age, mail = @mail WHERE id = @id;";
+            string query = "UPDATE Users SET name = @name, age = @age, mail = @mail, password = @password WHERE id = @id;";
+            string querySelect = "SELECT * FROM Users WHERE id = @id;";
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                var user = connection.QueryFirstOrDefault<User>(queryUpdateUser, new { id });
-                if (user == null)
-                    throw new Exception($"User with ID {id} not found.");
-
-                string newName = name ?? user.Name;
-                int newAge = age ?? user.Age;
-                string newMail = mail ?? user.Mail;
-
-                connection.Execute(query, new { name = newName, age = newAge, mail = newMail, id });
-                return connection.QueryFirstOrDefault<User>(queryUpdateUser, new { id });
+                connection.Execute(query, new { name, age, mail, password, id });
+                return connection.QueryFirstOrDefault<User>(querySelect, new { id });
             }
         }
 
