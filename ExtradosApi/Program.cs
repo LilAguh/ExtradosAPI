@@ -23,18 +23,20 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        var jwtSettings = builder.Configuration.GetSection("JwtSettings");
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "yourcode.com",   // “yourco.com” es el issuer/audience
-            ValidAudience = "yourcode.com", // “yourco.com” es el issuer/audience
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret_secret_secret"))
-            //codigo secreto que se debe guardar
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]))
         };
     });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
