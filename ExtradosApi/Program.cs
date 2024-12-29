@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IUserDAO, UserDAO>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton<IJwtService, JwtService>();
 
 
 //paso 1: configurar la validación por JWT
