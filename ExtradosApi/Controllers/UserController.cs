@@ -16,10 +16,12 @@ namespace ExtradosApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IJwtService _jwtService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IJwtService jwtService)
         {
             _userService = userService;
+            _jwtService = jwtService;
         }
 
         [HttpGet]
@@ -56,7 +58,8 @@ namespace ExtradosApi.Controllers
             try
             {
                 var user = _userService.GetUser(login.Mail, login.Password);
-                return Ok(user);
+                var token = _jwtService.GenerateToken(user.ID.ToString(), user.Mail);
+                return Ok(new{ user, token });
             }
             catch (UnauthorizedAccessException ex)
             {
