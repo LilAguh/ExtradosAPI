@@ -1,6 +1,9 @@
-﻿namespace ExtradosApi.Services.Interfaces
+﻿using DataAccess.Models;
+
+namespace ExtradosApi.Services.Interfaces
 {
-    public class IJwtService
+    public interface IJwtService
     {
+        string GenerateToken(string userID, string userEmail);
     }
 }
