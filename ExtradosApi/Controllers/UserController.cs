@@ -113,6 +113,7 @@ namespace ExtradosApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult UpdateUser(int id, [FromBody] User user)
         {
             try
