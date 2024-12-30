@@ -128,6 +128,7 @@ namespace ExtradosApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult DeactivateUser(int id)
         {
             try
