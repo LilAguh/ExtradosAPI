@@ -76,6 +76,7 @@ namespace ExtradosApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult GetUserById(int id)
         {
             try
