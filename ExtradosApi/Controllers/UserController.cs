@@ -8,6 +8,7 @@ using DataAccess.Implementations;
 using ExtradosApi.Services.Interfaces;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ExtradosApi.Controllers
 {
@@ -25,6 +26,7 @@ namespace ExtradosApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetAllUsersRegistered()
         {
             try
