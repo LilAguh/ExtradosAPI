@@ -3,12 +3,13 @@ using DataAccess.Models;
 using ExtradosApi.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using DataAccess.Interfaces;
 using DataAccess.Implementations;
 using ExtradosApi.Services.Interfaces;
 using BCrypt.Net;
-using Microsoft.AspNetCore.Identity.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ExtradosApi.Controllers
 {
@@ -41,6 +42,7 @@ namespace ExtradosApi.Controllers
         }
 
         [HttpGet("active")]
+        [Authorize]
         public IActionResult GetAllActiveUsers()
         {
             try
