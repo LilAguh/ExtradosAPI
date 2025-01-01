@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    public class BookLoans
+    public class BookLoan
     {
         public int ID { get; set; }
         public string BookName { get; set; } = string.Empty;
