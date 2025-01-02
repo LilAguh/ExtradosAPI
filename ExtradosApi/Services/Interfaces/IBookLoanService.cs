@@ -4,7 +4,7 @@ namespace ExtradosApi.Services.Interfaces
 {
     public interface IBookLoanService
     {
-        BookLoan CreateBookLoan(string bookName, int userId, DateTime loanDate, DateTime dueDate);
+        BookLoan CreateBookLoan(string bookName, int userId);
         List<BookLoan> GetBookLoansByUserId(int userId);
         bool ReturnBook(int loanId);
     }
