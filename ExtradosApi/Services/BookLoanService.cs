@@ -1,11 +1,10 @@
 ﻿using DataAccess.Interfaces;
-using DataAccess.Implementations;
 using DataAccess.Models;
 using ExtradosApi.Services.Interfaces;
 
 namespace ExtradosApi.Services
 {
-    public class BookLoanService
+    public class BookLoanService : IBookLoanService
     {
         private readonly IBookLoanDAO _bookLoanDAO;
 
